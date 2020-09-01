@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
+import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 // ---------------↓↓追記部①ここから↓↓---------------
 // @ts-ignore
@@ -32,33 +32,31 @@ function getUser() {
 }
 // ---------------↑↑追記部②ここまで↑↑---------------
 
-  const routes: Array<RouteConfig> = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-    meta: { requiresAuth: true }    // 追記
-  },
-  {                  // 追記
-    path: '/auth',   // 追記  
-    name: 'auth',    // 追記
-    component: components.Authenticator  // 追記
-  },                 // 追記
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-    meta: { requiresAuth: true }    // 追記
-  }
-]
-
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: Home,
+      meta: { requiresAuth: true }    // 追記
+    },
+    {                  // 追記
+      path: '/auth',   // 追記  
+      name: 'auth',    // 追記
+      component: components.Authenticator  // 追記
+    },                 // 追記
+    {
+      path: '/about',
+      name: 'About',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+      meta: { requiresAuth: true }    // 追記
+    }
+  ]
 })
 
 // ---------------↓↓追記部③ここから↓↓---------------
